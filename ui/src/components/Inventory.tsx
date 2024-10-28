@@ -39,8 +39,9 @@ export const Inventory = () => {
 	});
 
 	return (
-		<div>
-			<div class="title">Items</div>
+		<div class={styles.section}>
+			<div class={`title ${styles.title}`}>Items</div>
+
 			<For each={Object.values(items)}>
 				{(player) => (
 					<div>

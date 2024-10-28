@@ -1,0 +1,11 @@
+.container {
+	padding: 12px 16px;
+
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+
+	.col {
+		flex: 1;
+	}
+}

@@ -1,3 +1,11 @@
+.section {
+	text-align: center;
+
+	.title {
+		margin-bottom: 8px;
+	}
+}
+
 .items {
 	display: flex;
 	flex-direction: row;
