@@ -1,0 +1,46 @@
+.items {
+	display: flex;
+	flex-direction: row;
+	gap: 12px;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 8px;
+	margin-bottom: 16px;
+
+	@keyframes show {
+		0% {
+			transform: scale(1.5);
+			background: rgb(32, 64, 248);
+		}
+
+		100% {
+			transform: none;
+			background: none;
+		}
+	}
+
+	.item {
+		&.appearAnimation img {
+			animation: show 800ms cubic-bezier(0.38, 0.97, 0.56, 0.76);
+		}
+
+		img {
+			border-radius: 50%;
+			transition: transform 0.2s ease-in-out;
+		}
+
+		&:hover img {
+			transform: scale(1.2);
+		}
+
+		position: relative;
+
+		.quantity {
+			color: white;
+			position: absolute;
+			z-index: 1;
+			right: -4px;
+			bottom: -4px;
+		}
+	}
+}

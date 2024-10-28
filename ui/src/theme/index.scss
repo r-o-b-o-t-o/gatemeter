@@ -1,0 +1,62 @@
+@use "./fonts.scss";
+
+html,
+body,
+#root {
+	height: 100%;
+}
+
+html,
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+html {
+	background-color: #1d1d1d;
+	font-family: "Mont";
+}
+
+.title {
+	font-family: "TheBoldFont";
+	font-size: 26px;
+	color: #fafafa;
+	-webkit-text-stroke: 0.5px #3d3d3d;
+	filter: drop-shadow(0px 2px 1px black);
+}
+
+.title-2 {
+	font-family: "TheBoldFont";
+	font-size: 16px;
+	color: #fafafa;
+	filter: drop-shadow(0px 1px 1px black);
+}
+
+svg .plot {
+	text {
+		font-family: "TheBoldFont";
+		fill: #fafafa;
+		stroke: #3d3d3d;
+		stroke-width: 0.5px;
+		filter: drop-shadow(0px 2px 1px black);
+	}
+
+	.bar {
+		&.show-category text.label {
+			font-size: 26px;
+		}
+
+		text.label {
+			font-size: 36px;
+		}
+
+		text.cat {
+			font-size: 16px;
+		}
+
+		text.value {
+			font-size: 32px;
+			text-anchor: end;
+		}
+	}
+}

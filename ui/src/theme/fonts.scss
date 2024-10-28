@@ -1,0 +1,59 @@
+@font-face {
+	font-family: "TheBoldFont";
+	src: url("../assets/fonts/theboldfont.ttf");
+}
+
+@font-face {
+	font-family: "Mont";
+	font-weight: 300;
+	font-style: normal;
+	src: url("../assets/fonts/mont/Mont-Light.otf") format("opentype");
+	src:
+		url("../assets/fonts/mont/Mont-Light.otf") format("opentype"),
+		url("../assets/fonts/mont/Mont-Light.woff") format("woff"),
+		url("../assets/fonts/mont/Mont-Light.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Mont";
+	font-weight: 400;
+	font-style: normal;
+	src: url("../assets/fonts/mont/Mont-Regular.otf") format("opentype");
+	src:
+		url("../assets/fonts/mont/Mont-Regular.otf") format("opentype"),
+		url("../assets/fonts/mont/Mont-Regular.woff") format("woff"),
+		url("../assets/fonts/mont/Mont-Regular.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Mont";
+	font-weight: 600;
+	font-style: normal;
+	src: url("../assets/fonts/mont/Mont-SemiBold.otf") format("opentype");
+	src:
+		url("../assets/fonts/mont/Mont-SemiBold.otf") format("opentype"),
+		url("../assets/fonts/mont/Mont-SemiBold.woff") format("woff"),
+		url("../assets/fonts/mont/Mont-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Mont";
+	font-weight: 700;
+	font-style: normal;
+	src: url("../assets/fonts/mont/Mont-Bold.otf") format("opentype");
+	src:
+		url("../assets/fonts/mont/Mont-Bold.otf") format("opentype"),
+		url("../assets/fonts/mont/Mont-Bold.woff") format("woff"),
+		url("../assets/fonts/mont/Mont-Bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Mont";
+	font-weight: 900;
+	font-style: normal;
+	src: url("../assets/fonts/mont/Mont-Black.otf") format("opentype");
+	src:
+		url("../assets/fonts/mont/Mont-Black.otf") format("opentype"),
+		url("../assets/fonts/mont/Mont-Black.woff") format("woff"),
+		url("../assets/fonts/mont/Mont-Black.woff2") format("woff2");
+}

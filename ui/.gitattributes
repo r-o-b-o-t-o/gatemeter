@@ -1,0 +1,2 @@
+eslint.config.mjs linguist-vendored
+vite.config.mts linguist-vendored
