@@ -9,16 +9,13 @@ export default tseslint.config(
 	...tseslint.configs.recommended,
 	eslintPluginPrettierRecommended,
 	{
-		ignores: ["dist/"],
+		ignores: ["dist/", "styled-system/"],
 	},
 	{
 		files: ["**/*.{ts,tsx}"],
 		...solid,
 		languageOptions: {
 			parser: tsParser,
-			parserOptions: {
-				project: "tsconfig.json",
-			},
 		},
 	}
 );

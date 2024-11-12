@@ -14,12 +14,9 @@ interface IDataType {
 
 interface IProperties<T extends IDataType> {
 	data: T[];
-	width: number;
-	height: number;
 	barCount: number;
 	categories: string[];
 	categoryImages?: string[];
-	barHeight?: number;
 	delay?: number;
 	showCategory?: boolean;
 	initialBarColors?: (d3.RGBColor | string)[];
@@ -39,12 +36,12 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 	const barColors = props.initialBarColors ?? d3.schemeCategory10;
 	const delay = () => props.delay ?? 500;
 	const showCategory = () => props.showCategory ?? true;
-	const plotW = () => props.width;
-	const plotH = () => props.height;
+	const plotW = 500;
+	const plotH = 300;
 	const hasImages = () => props.categoryImages?.length > 0;
 
 	const xScale = d3.scaleLinear();
-	const yScale = d3.scaleBand(d3.range(barCount()), [0, plotH()]);
+	const yScale = d3.scaleBand(d3.range(barCount()), [0, plotH]);
 	const cScale = d3.scaleOrdinal(barColors);
 
 	const reset = () => {
@@ -52,10 +49,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		plot.selectAll("g.bar").remove();
 	};
 
-	createEffect(() => {
-		xScale.rangeRound([0, plotW()]);
-		draw();
-	});
+	xScale.rangeRound([0, plotW]);
 
 	createEffect(() => {
 		props.setReset?.(() => {
@@ -204,17 +198,10 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 	const clipPathId = `clip-path-${nanoid()}`;
 
 	return (
-		<svg
-			id={props.id}
-			class={props.class ?? ""}
-			ref={svgRef}
-			width={props.width}
-			height={props.height}
-			viewBox={`0 0 ${props.width} ${props.height}`}
-		>
+		<svg id={props.id} class={props.class ?? ""} ref={svgRef} width="100%" height="100%" viewBox={`0 0 ${plotW} ${plotH}`}>
 			<g ref={plotRef} class="plot" clip-path={`url(#${clipPathId})`}>
 				<clipPath id={clipPathId}>
-					<rect x={0} y={0} width={plotW()} height={plotH()} />
+					<rect x={0} y={0} width={plotW} height={plotH} />
 				</clipPath>
 			</g>
 		</svg>

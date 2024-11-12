@@ -1,18 +1,17 @@
-import { createElementSize } from "@solid-primitives/resize-observer";
 import { throttle } from "@solid-primitives/scheduled";
-import { createSignal, onMount } from "solid-js";
+import { createEffect, createSignal, onCleanup } from "solid-js";
 
-import { ws } from "../App";
 import { CharacterStatsMessage } from "../WsMessages";
-import { characterCategories, characterChartBarHeight, characterColors, chartsDelay, maxPlayers } from "../consts";
+import { characterCategories, characterColors, chartsDelay, maxPlayers } from "../consts";
 import { characterImages } from "../images";
 import { mapPlayerData, rankByValues } from "../utils";
 import { BarChartRace } from "./BarChartRace";
 import styles from "./KillsChart.module.scss";
+import { css } from "styled-system/css";
+import { useWs } from "~/WsClient";
 
 export const KillsChart = () => {
-	let containerRef: HTMLDivElement;
-	const containerSize = createElementSize(() => containerRef);
+	const ws = useWs();
 
 	const [kills, setKills] = createSignal<
 		{
@@ -27,28 +26,35 @@ export const KillsChart = () => {
 	const setKillsThrottled = throttle(setKills, chartsDelay);
 	const [resetChart, setResetChart] = createSignal<() => void>();
 
-	onMount(() => {
-		ws.addListener("message:CharacterStats", (msg: CharacterStatsMessage) => {
-			const stats = msg.Data;
+	const onCharacterStats = (msg: CharacterStatsMessage) => {
+		const stats = msg.Data;
 
-			setKillsThrottled(() => {
-				const data = stats.map((player) => mapPlayerData(player, player.Kills));
-				rankByValues(data);
-				return data;
-			});
+		setKillsThrottled(() => {
+			const data = stats.map((player) => mapPlayerData(player, player.Kills));
+			rankByValues(data);
+			return data;
 		});
+	};
 
-		// eslint-disable-next-line solid/reactivity
-		ws.addListener("message:ResetData", () => {
-			setKills([]);
-			resetChart()();
-		});
+	const onResetData = () => {
+		setKills([]);
+		resetChart()();
+	};
+
+	createEffect(() => {
+		ws()?.on("message:CharacterStats", onCharacterStats);
+		ws()?.on("message:ResetData", onResetData);
+	});
+
+	onCleanup(() => {
+		ws()?.off("message:CharacterStats", onCharacterStats);
+		ws()?.off("message:ResetData", onResetData);
 	});
 
 	return (
-		<div class={styles.section}>
+		<div class={css({ display: "flex", flexDir: "column", flex: 1, justifyContent: "center", textAlign: "center", minHeight: "0" })}>
 			<div class="title">Kills</div>
-			<div ref={containerRef}>
+			<div class={css({ minHeight: "0" })}>
 				<BarChartRace
 					class={styles.chart}
 					data={kills()}
@@ -56,8 +62,6 @@ export const KillsChart = () => {
 					categoryImages={characterImages}
 					initialBarColors={characterColors}
 					showCategory={true}
-					width={containerSize?.width}
-					height={characterChartBarHeight * maxPlayers}
 					delay={chartsDelay}
 					barCount={maxPlayers}
 					setReset={setResetChart}

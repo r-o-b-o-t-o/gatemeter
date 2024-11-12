@@ -1,20 +1,21 @@
-import { onCleanup, onMount } from "solid-js";
+import { createSignal, onCleanup, onMount } from "solid-js";
 
-import { WsClient } from "./WsClient";
+import { WsClient, WsProvider } from "./WsClient";
 import "./theme/index.scss";
-
-export let ws: WsClient;
+import "./theme/panda.css";
 
 const App = (props) => {
+	const [ws, setWs] = createSignal<WsClient>();
+
 	onMount(() => {
-		ws = new WsClient(import.meta.env.VITE_WS_URL);
+		setWs(new WsClient(import.meta.env.VITE_WS_URL));
 	});
 
 	onCleanup(() => {
-		ws?.close();
+		ws()?.close();
 	});
 
-	return <>{props.children}</>;
+	return <WsProvider ws={ws}>{props.children}</WsProvider>;
 };
 
 export default App;

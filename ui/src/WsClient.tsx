@@ -1,6 +1,18 @@
-import EventEmitter from "events";
+import { JSX, createContext, useContext } from "solid-js";
 
+import { EventEmitter } from "eventemitter3";
 import { ArrayQueue, ConstantBackoff, Websocket, WebsocketBuilder, WebsocketEvent } from "websocket-ts";
+
+export const WsContext = createContext<() => WsClient>();
+
+export const WsProvider = (props: { ws: () => WsClient; children: string | JSX.Element | JSX.Element[] }) => {
+	// eslint-disable-next-line solid/reactivity
+	return <WsContext.Provider value={props.ws}>{props.children}</WsContext.Provider>;
+};
+
+export const useWs = () => {
+	return useContext(WsContext);
+};
 
 export class WsClient extends EventEmitter {
 	private ws: Websocket;
