@@ -6,7 +6,6 @@ import { characterCategories, characterColors, chartsDelay, maxPlayers } from ".
 import { characterImages } from "../images";
 import { mapPlayerData, rankByValues } from "../utils";
 import { BarChartRace } from "./BarChartRace";
-import styles from "./DamageDealtChart.module.scss";
 import { css } from "styled-system/css";
 import { useWs } from "~/WsClient";
 
@@ -56,7 +55,7 @@ export const DamageDealtChart = () => {
 			<div class="title">Damage dealt&ensp;(total)</div>
 			<div class={css({ minHeight: "0" })}>
 				<BarChartRace
-					class={styles.chart}
+					class={css({ marginTop: "1" })}
 					data={damageDealt()}
 					categories={characterCategories}
 					categoryImages={characterImages}

@@ -5,7 +5,6 @@ import { css } from "../../styled-system/css";
 import { InventoryMessage } from "../WsMessages";
 import { itemsEnum } from "../consts";
 import { itemImages } from "../images";
-import styles from "./Inventory.module.scss";
 import { useWs } from "~/WsClient";
 
 export const Inventory = () => {
@@ -48,14 +47,26 @@ export const Inventory = () => {
 	});
 
 	return (
-		<div class={styles.section}>
-			<div class={`title ${styles.title}`}>Items</div>
+		<div class={css({ textAlign: "center" })}>
+			<div class={css({ marginBottom: "2" })} classList={{ title: true }}>
+				Items
+			</div>
 
 			<For each={Object.values(items)}>
 				{(player) => (
 					<div>
 						<div class="title-2">{player.name}</div>
-						<div class={styles.items}>
+						<div
+							class={css({
+								display: "flex",
+								flexDir: "row",
+								gap: "3",
+								flexWrap: "wrap",
+								justifyContent: "center",
+								marginTop: "2",
+								marginBottom: "4",
+							})}
+						>
 							<For each={Object.keys(itemsEnum)}>
 								{(itemId) => {
 									const [appearAnim, setAppearAnim] = createSignal(true);
@@ -69,10 +80,33 @@ export const Inventory = () => {
 
 									return (
 										<Show when={player.items[itemId] > 0}>
-											<div class={styles.item} classList={{ [styles.appearAnimation]: appearAnim() }}>
-												<img class={css({ height: "12", width: "auto" })} src={itemImages[itemId]} />
+											<div class={css({ position: "relative" })} classList={{ group: true }}>
+												<img
+													class={css({
+														height: "12",
+														width: "auto",
+														borderRadius: "full",
+														transition: "transform 0.2s ease-in-out",
+														userSelect: "none",
+														_groupHover: {
+															transform: "scale(1.2)",
+														},
+													})}
+													classList={{ [css({ animation: "spin 800ms" })]: appearAnim() }}
+													src={itemImages[itemId]}
+												/>
 												<Show when={player.items[itemId] > 1}>
-													<span class={styles.quantity}>x{player.items[itemId]}</span>
+													<span
+														class={css({
+															color: "white",
+															position: "absolute",
+															zIndex: 1,
+															right: "-1",
+															bottom: "-1",
+														})}
+													>
+														x{player.items[itemId]}
+													</span>
 												</Show>
 											</div>
 										</Show>
