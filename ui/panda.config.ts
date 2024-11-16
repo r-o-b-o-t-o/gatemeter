@@ -11,6 +11,7 @@ export default defineConfig({
 			accentColor: "indigo",
 			grayColor: "slate",
 			borderRadius: "md",
+			additionalColors: ["*"],
 		}),
 	],
 

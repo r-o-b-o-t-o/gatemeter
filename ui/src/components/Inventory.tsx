@@ -1,10 +1,10 @@
-import { For, Show, createEffect, createSignal, onCleanup } from "solid-js";
+import { For, Show, createEffect, onCleanup } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
-import { Portal } from "solid-js/web";
 
 import { css } from "../../styled-system/css";
 import { InventoryMessage } from "../WsMessages";
-import { Tooltip } from "./ui/tooltip";
+import { Item } from "./Item";
+import { Triad } from "./Triad";
 import { useWs } from "~/WsClient";
 import { allItems } from "~/items";
 
@@ -48,91 +48,60 @@ export const Inventory = () => {
 	});
 
 	return (
-		<div class={css({ textAlign: "center" })}>
+		<div class={css({ textAlign: "center", overflowY: "auto", overflowX: "hidden", height: "100%", paddingY: "2", paddingX: "4" })}>
 			<div class={css({ marginBottom: "2" })} classList={{ title: true }}>
-				Items
+				Artifacts
 			</div>
 
 			<For each={Object.values(items)}>
-				{(player) => (
-					<div>
-						<div class="title-2">{player.name}</div>
-						<div
-							class={css({
-								display: "flex",
-								flexDir: "row",
-								gap: "3",
-								flexWrap: "wrap",
-								justifyContent: "center",
-								marginTop: "2",
-								marginBottom: "4",
-							})}
-						>
-							<For each={Object.keys(allItems)}>
-								{(itemId) => {
-									const [appearAnim, setAppearAnim] = createSignal(true);
-									createEffect(() => {
-										if (player.items[itemId] > 0) {
-											setAppearAnim(false);
-											setAppearAnim(true);
-											setTimeout(() => setAppearAnim(false), 1000);
-										}
-									});
+				{(player) => {
+					const totalCount = () => Object.values(player.items).reduce((sum, current) => sum + current, 0);
+					return (
+						<div>
+							<div class="title-2">
+								{player.name} ({totalCount()})
+							</div>
+							<div
+								class={css({
+									display: "flex",
+									flexDir: "row",
+									gap: "3",
+									flexWrap: "wrap",
+									justifyContent: "center",
+									marginTop: "2",
+								})}
+							>
+								<For each={Object.keys(allItems).filter((itemId) => !allItems[itemId].triad)}>
+									{(itemId) => {
+										const item = allItems[itemId];
+										const count = () => player.items[itemId] ?? 0;
+										return (
+											<Show when={count() > 0}>
+												<Item item={item} count={count()} initialAppearAnimation />
+											</Show>
+										);
+									}}
+								</For>
+							</div>
 
-									return (
-										<Show when={player.items[itemId] > 0}>
-											<Tooltip.Root openDelay={0} closeDelay={0}>
-												<Tooltip.Trigger>
-													<div class={css({ position: "relative" })} classList={{ group: true }}>
-														<img
-															class={css({
-																height: "12",
-																width: "auto",
-																borderRadius: "full",
-																transition: "transform 0.2s ease-in-out",
-																userSelect: "none",
-																_groupHover: {
-																	transform: "scale(1.2)",
-																},
-															})}
-															classList={{ [css({ animation: "spin 800ms" })]: appearAnim() }}
-															src={allItems[itemId].image}
-														/>
-														<Show when={player.items[itemId] > 1}>
-															<span
-																class={css({
-																	color: "white",
-																	fontFamily: "mont",
-																	position: "absolute",
-																	zIndex: 1,
-																	right: "-1",
-																	bottom: "-1",
-																})}
-															>
-																x{player.items[itemId]}
-															</span>
-														</Show>
-													</div>
-												</Tooltip.Trigger>
-
-												<Portal>
-													<Tooltip.Positioner>
-														<Tooltip.Arrow>
-															<Tooltip.ArrowTip />
-														</Tooltip.Arrow>
-														<Tooltip.Content>
-															<span class={css({ fontFamily: "mont" })}>{allItems[itemId].name}</span>
-														</Tooltip.Content>
-													</Tooltip.Positioner>
-												</Portal>
-											</Tooltip.Root>
-										</Show>
-									);
-								}}
-							</For>
+							<div
+								class={css({
+									display: "flex",
+									flexDir: "row",
+									gap: "3",
+									flexWrap: "wrap",
+									justifyContent: "center",
+									marginTop: "2",
+									marginBottom: "4",
+								})}
+							>
+								<For each={Object.values(allItems).filter((item) => !!item.triad)}>
+									{(item) => <Triad item={item} itemCount={(id) => player.items[id] ?? 0} />}
+								</For>
+							</div>
 						</div>
-					</div>
-				)}
+					);
+				}}
 			</For>
 		</div>
 	);

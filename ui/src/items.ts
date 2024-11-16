@@ -80,7 +80,14 @@ import VertebralImplantImg from "./assets/img/items/VertebralImplant.png";
 import WiltHazeImg from "./assets/img/items/WiltHaze.png";
 import YellowPillImg from "./assets/img/items/YellowPill.png";
 
-export const allItems: { [key: number | string]: { code: string; name: string; image: string } } = {
+export interface IItem {
+	code: string;
+	name: string;
+	image: string;
+	triad?: number[];
+}
+
+export const allItems: { [key: number | string]: IItem } = {
 	1: { code: "AdrenalinePill", name: "Adrenaline Pill", image: AdrenalinePillImg },
 	2: { code: "Argument", name: "Argument", image: ArgumentImg },
 	3: { code: "BadMood", name: "Bad Mood", image: BadMoodImg },
@@ -162,19 +169,19 @@ export const allItems: { [key: number | string]: { code: string; name: string; i
 	79: { code: "BalefulBoon", name: "Baleful Boon", image: BalefulBoonImg },
 	80: { code: "Tamer", name: "Tamer", image: TamerImg },
 	81: { code: "Superiority", name: "Superiority", image: SuperiorityImg },
-	1000: { code: "TriadOfScorch", name: "Triad of Scorch", image: null },
-	1001: { code: "TriadOfLife", name: "Triad of Life", image: null },
-	1002: { code: "TriadOfCarnage", name: "Triad of Carnage", image: null },
-	1003: { code: "TriadOfRegeneration", name: "Triad of Regeneration", image: null },
-	1004: { code: "TriadOfShock", name: "Triad of Shock", image: null },
-	1005: { code: "TriadOfEmber", name: "Triad of Ember", image: null },
-	1006: { code: "TriadOfCalibration", name: "Triad of Calibration", image: null },
-	1007: { code: "TriadOfAssault", name: "Triad of Assault", image: null },
-	1008: { code: "TriadOfCinderstorm", name: "Triad of Cinderstorm", image: null },
-	1009: { code: "TriadOfArgument", name: "Triad of Argument", image: null },
-	1010: { code: "TriadOfReflection", name: "Triad of Reflection", image: null },
-	1011: { code: "TriadOfMeteor", name: "Triad of Lumilore", image: null },
-	1012: { code: "TriadOfDevastation", name: "Triad of Devastation", image: null },
-	1013: { code: "TriadOfTides", name: "Triad of Tides", image: null },
-	1014: { code: "TriadOfFireflow", name: "Triad of Fireflow", image: null },
+	1000: { code: "TriadOfScorch", name: "Triad of Scorch", image: null, triad: [6, 10, 67] },
+	1001: { code: "TriadOfLife", name: "Triad of Life", image: null, triad: [7, 45, 28] },
+	1002: { code: "TriadOfCarnage", name: "Triad of Carnage", image: null, triad: [4, 51, 8] },
+	1003: { code: "TriadOfRegeneration", name: "Triad of Regeneration", image: null, triad: [14, 23, 43] },
+	1004: { code: "TriadOfShock", name: "Triad of Shock", image: null, triad: [9, 73, 53] },
+	1005: { code: "TriadOfEmber", name: "Triad of Ember", image: null, triad: [18, 19, 25] },
+	1006: { code: "TriadOfCalibration", name: "Triad of Calibration", image: null, triad: [12, 11, 52] },
+	1007: { code: "TriadOfAssault", name: "Triad of Assault", image: null, triad: [66, 69, 65] },
+	1008: { code: "TriadOfCinderstorm", name: "Triad of Cinderstorm", image: null, triad: [74, 58, 57] },
+	1009: { code: "TriadOfArgument", name: "Triad of Argument", image: null, triad: [3, 2, 5] },
+	1010: { code: "TriadOfReflection", name: "Triad of Reflection", image: null, triad: [21, 56, 50] },
+	1011: { code: "TriadOfMeteor", name: "Triad of Lumilore", image: null, triad: [27, 61, 71] },
+	1012: { code: "TriadOfDevastation", name: "Triad of Devastation", image: null, triad: [32, 55, 60] },
+	1013: { code: "TriadOfTides", name: "Triad of Tides", image: null, triad: [36, 63, 26] },
+	1014: { code: "TriadOfFireflow", name: "Triad of Fireflow", image: null, triad: [35, 47, 20] },
 };
