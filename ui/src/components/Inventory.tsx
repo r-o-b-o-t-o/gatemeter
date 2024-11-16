@@ -1,11 +1,12 @@
 import { For, Show, createEffect, createSignal, onCleanup } from "solid-js";
 import { createStore, reconcile } from "solid-js/store";
+import { Portal } from "solid-js/web";
 
 import { css } from "../../styled-system/css";
 import { InventoryMessage } from "../WsMessages";
-import { itemsEnum } from "../consts";
-import { itemImages } from "../images";
+import { Tooltip } from "./ui/tooltip";
 import { useWs } from "~/WsClient";
+import { allItems } from "~/items";
 
 export const Inventory = () => {
 	const ws = useWs();
@@ -67,7 +68,7 @@ export const Inventory = () => {
 								marginBottom: "4",
 							})}
 						>
-							<For each={Object.keys(itemsEnum)}>
+							<For each={Object.keys(allItems)}>
 								{(itemId) => {
 									const [appearAnim, setAppearAnim] = createSignal(true);
 									createEffect(() => {
@@ -80,35 +81,48 @@ export const Inventory = () => {
 
 									return (
 										<Show when={player.items[itemId] > 0}>
-											<div class={css({ position: "relative" })} classList={{ group: true }}>
-												<img
-													class={css({
-														height: "12",
-														width: "auto",
-														borderRadius: "full",
-														transition: "transform 0.2s ease-in-out",
-														userSelect: "none",
-														_groupHover: {
-															transform: "scale(1.2)",
-														},
-													})}
-													classList={{ [css({ animation: "spin 800ms" })]: appearAnim() }}
-													src={itemImages[itemId]}
-												/>
-												<Show when={player.items[itemId] > 1}>
-													<span
-														class={css({
-															color: "white",
-															position: "absolute",
-															zIndex: 1,
-															right: "-1",
-															bottom: "-1",
-														})}
-													>
-														x{player.items[itemId]}
-													</span>
-												</Show>
-											</div>
+											<Tooltip.Root openDelay={0} closeDelay={0}>
+												<Tooltip.Trigger>
+													<div class={css({ position: "relative" })} classList={{ group: true }}>
+														<img
+															class={css({
+																height: "12",
+																width: "auto",
+																borderRadius: "full",
+																transition: "transform 0.2s ease-in-out",
+																userSelect: "none",
+																_groupHover: {
+																	transform: "scale(1.2)",
+																},
+															})}
+															classList={{ [css({ animation: "spin 800ms" })]: appearAnim() }}
+															src={allItems[itemId].image}
+														/>
+														<Show when={player.items[itemId] > 1}>
+															<span
+																class={css({
+																	color: "white",
+																	position: "absolute",
+																	zIndex: 1,
+																	right: "-1",
+																	bottom: "-1",
+																})}
+															>
+																x{player.items[itemId]}
+															</span>
+														</Show>
+													</div>
+												</Tooltip.Trigger>
+
+												<Portal>
+													<Tooltip.Positioner>
+														<Tooltip.Arrow>
+															<Tooltip.ArrowTip />
+														</Tooltip.Arrow>
+														<Tooltip.Content>{allItems[itemId].name}</Tooltip.Content>
+													</Tooltip.Positioner>
+												</Portal>
+											</Tooltip.Root>
 										</Show>
 									);
 								}}
