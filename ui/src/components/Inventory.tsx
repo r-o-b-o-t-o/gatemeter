@@ -102,6 +102,7 @@ export const Inventory = () => {
 															<span
 																class={css({
 																	color: "white",
+																	fontFamily: "mont",
 																	position: "absolute",
 																	zIndex: 1,
 																	right: "-1",
@@ -119,7 +120,9 @@ export const Inventory = () => {
 														<Tooltip.Arrow>
 															<Tooltip.ArrowTip />
 														</Tooltip.Arrow>
-														<Tooltip.Content>{allItems[itemId].name}</Tooltip.Content>
+														<Tooltip.Content>
+															<span class={css({ fontFamily: "mont" })}>{allItems[itemId].name}</span>
+														</Tooltip.Content>
 													</Tooltip.Positioner>
 												</Portal>
 											</Tooltip.Root>

@@ -14,7 +14,11 @@ body {
 
 html {
 	background-color: #1d1d1d;
-	font-family: "Mont";
+}
+
+:root {
+	--font-mont: "Mont";
+	--font-bold: "TheBoldFont";
 }
 
 .title {

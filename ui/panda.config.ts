@@ -14,6 +14,17 @@ export default defineConfig({
 		}),
 	],
 
+	theme: {
+		extend: {
+			tokens: {
+				fonts: {
+					mont: { value: "var(--font-mont)" },
+					bold: { value: "var(--font-bold)" },
+				},
+			},
+		},
+	},
+
 	// Where to look for your css declarations
 	include: ["./src/**/*.{js,jsx,ts,tsx}"],
 
