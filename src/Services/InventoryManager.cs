@@ -1,15 +1,24 @@
-﻿using Il2CppGatekeeper.Items;
+﻿using GatekeeperDamageMeter.Events;
+using Il2CppGatekeeper.Items;
 
-namespace GatekeeperDamageMeter;
+namespace GatekeeperDamageMeter.Services;
 
-public class InventoryManager
+public sealed class InventoryManager : IDisposable
 {
     private class InventoryData
     {
         public Dictionary<ItemID, int> Items { get; set; } = new();
     }
 
+    private readonly GameResetEventEmitter gameResetEventEmitter;
     private readonly Dictionary<int, InventoryData> inventories = new();
+
+    public InventoryManager(GameResetEventEmitter gameResetEventEmitter)
+    {
+        this.gameResetEventEmitter = gameResetEventEmitter;
+
+        gameResetEventEmitter.GameReset += Reset;
+    }
 
     public void AddItem(int clientId, ItemID itemId, int quantity)
     {
@@ -39,7 +48,7 @@ public class InventoryManager
         return items;
     }
 
-    public void Reset()
+    private void Reset()
     {
         inventories.Clear();
     }
@@ -54,5 +63,10 @@ public class InventoryManager
         {
             inventories[clientId].Items[itemId] = 0;
         }
+    }
+
+    public void Dispose()
+    {
+        gameResetEventEmitter.GameReset -= Reset;
     }
 }

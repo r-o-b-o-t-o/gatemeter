@@ -2,7 +2,7 @@ using MelonLoader;
 using System.Text.Json;
 using WatsonWebsocket;
 
-namespace GatekeeperDamageMeter;
+namespace GatekeeperDamageMeter.Services;
 
 public class WebSocketServer
 {
@@ -13,17 +13,16 @@ public class WebSocketServer
 
     public Action<Guid> OnClientConnected;
     public Action<Guid> OnClientDisconnected;
-
     private readonly WatsonWsServer server;
 
-    public WebSocketServer(string host, int port)
+    public WebSocketServer(MelonLogger.Instance logger, string host, int port)
     {
         server = new WatsonWsServer(host, port, false);
         server.ClientConnected += ClientConnected;
         server.ClientDisconnected += ClientDisconnected;
         server.MessageReceived += MessageReceived;
         server.Start();
-        Melon<DamageMeterMod>.Logger.Msg("WebSocket server started on port " + port);
+        logger.Msg("WebSocket server started on port " + port);
     }
 
     public async Task BroadcastAsync(IMessage message)

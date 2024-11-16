@@ -1,19 +1,19 @@
-﻿using Il2CppGatekeeper.Char_Scripts.General;
+﻿using GatekeeperDamageMeter.Events;
+using GatekeeperDamageMeter.Services;
 using MelonLoader;
-using UnityEngine;
 
 namespace GatekeeperDamageMeter;
 
-public class DamageMeterMod : MelonMod
+public class DamageMeterMod : MelonMod, IUpdateEventEmitter
 {
-    private IHost host;
-    private IServiceProvider services;
+    public Action Update { get; set; }
+    public Action LateUpdate { get; set; }
 
+    private IHost host;
     private MelonPreferences_Category config;
     private MelonPreferences_Entry<int> staticServerPort;
     private MelonPreferences_Entry<string> wsServerHost;
     private MelonPreferences_Entry<int> wsServerPort;
-    private string lastScene = "";
 
     public override void OnInitializeMelon()
     {
@@ -25,18 +25,25 @@ public class DamageMeterMod : MelonMod
         IHostBuilder builder = Host.CreateDefaultBuilder();
         builder.ConfigureServices(
             servicesBuilder => servicesBuilder
+                .AddSingleton(LoggerInstance)
+                .AddSingleton<IUpdateEventEmitter>(this)
+                .AddSingleton<ICharacterStatsUpdateEventEmitter, CharacterStatsUpdater>()
+                .AddSingleton<GameResetEventEmitter>()
+                .AddSingleton<NewLevelEventEmitter>()
                 .AddScoped<CharacterUtils>()
                 .AddSingleton<InventoryManager>()
+                .AddSingleton<LevelCharacterStatsManager>()
+                .AddSingleton<WsDispatcher>()
 #if !DEBUG
                 .AddSingleton(new StaticWebServer(Path.Combine(Path.GetDirectoryName(MelonAssembly.Location), "GatekeeperDamageMeter"), staticServerPort.Value))
 #endif
-                .AddSingleton(new WebSocketServer(wsServerHost.Value, wsServerPort.Value))
+                .AddSingleton((provider) => new WebSocketServer(provider.GetRequiredService<MelonLogger.Instance>(), wsServerHost.Value, wsServerPort.Value))
         );
 
         host = builder.Build();
-        services = Services();
 
-        services.GetRequiredService<WebSocketServer>().OnClientConnected += WsOnClientConnected;
+        // Force activation
+        Services().GetRequiredService<WsDispatcher>();
     }
 
     public IServiceProvider Services()
@@ -44,63 +51,13 @@ public class DamageMeterMod : MelonMod
         return host.Services.CreateScope().ServiceProvider;
     }
 
-    public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-    {
-        if (lastScene == "MainMenu")
-        {
-            InventoryManager inventoryMgr = services.GetRequiredService<InventoryManager>();
-            inventoryMgr.Reset();
-
-            WebSocketServer ws = services.GetRequiredService<WebSocketServer>();
-            ws.Broadcast(new ResetDataMessage());
-        }
-
-        lastScene = sceneName;
-    }
-
     public override void OnUpdate()
     {
-        if (Time.frameCount % 10 == 0)
-        {
-            SendCharacterStats();
-        }
+        Update?.Invoke();
     }
 
-    private void SendCharacterStats()
+    public override void OnLateUpdate()
     {
-        CharacterUtils charUtils = services.GetRequiredService<CharacterUtils>();
-        CharacterStatsMessageData[] data = charUtils.CharManagers().Select(c => new CharacterStatsMessageData()
-        {
-            ClientId = c.GetClientId(),
-            Name = c.GetPlayerName(),
-            Character = c.GetGatekeeperCharacter(),
-            DamageDealt = c.CharStats.DamageDealt,
-            DamageReceived = c.CharStats.DamageReceived,
-            Kills = c.CharStats.EnemiesKilled,
-        }).ToArray();
-
-        if (data.Length > 0)
-        {
-            services.GetRequiredService<WebSocketServer>().Broadcast(new CharacterStatsMessage() { Data = data });
-        }
-    }
-
-    private void WsOnClientConnected(Guid client)
-    {
-        WebSocketServer ws = services.GetRequiredService<WebSocketServer>();
-        CharacterUtils charUtils = services.GetRequiredService<CharacterUtils>();
-        InventoryManager inventoryManager = services.GetService<InventoryManager>();
-
-        foreach (CharManager charMgr in charUtils.CharManagers())
-        {
-            int clientId = charMgr.GetClientId();
-
-            ws.Send(client, new InventoryMessage()
-            {
-                ClientId = clientId,
-                Name = charMgr.GetPlayerName(),
-                Items = inventoryManager.GetItems(clientId),
-            });
-        }
+        LateUpdate?.Invoke();
     }
 }

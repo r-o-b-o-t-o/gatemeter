@@ -1,3 +1,5 @@
+using GatekeeperDamageMeter.Services;
+
 namespace GatekeeperDamageMeter;
 
 public class CharacterStatsMessageData
@@ -16,6 +18,12 @@ public class CharacterStatsMessage : WebSocketServer.IMessage
     public CharacterStatsMessageData[] Data { get; set; }
 }
 
+public class LevelCharacterStatsMessage : WebSocketServer.IMessage
+{
+    public string MessageType => "LevelCharacterStats";
+    public CharacterStatsMessageData[] Data { get; set; }
+}
+
 public class InventoryMessage : WebSocketServer.IMessage
 {
     public string MessageType => "Inventory";
@@ -27,4 +35,9 @@ public class InventoryMessage : WebSocketServer.IMessage
 public class ResetDataMessage : WebSocketServer.IMessage
 {
     public string MessageType => "ResetData";
+}
+
+public class NewLevelMessage : WebSocketServer.IMessage
+{
+    public string MessageType => "NewLevel";
 }

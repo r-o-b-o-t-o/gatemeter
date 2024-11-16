@@ -1,18 +1,19 @@
-﻿using HarmonyLib;
+﻿using GatekeeperDamageMeter.Services;
+using HarmonyLib;
 using Il2CppGatekeeper.Char_Scripts.General;
 using Il2CppGatekeeper.Items;
 using MelonLoader;
 
-namespace GatekeeperDamageMeter;
+namespace GatekeeperDamageMeter.Patches;
 
 [HarmonyPatch(typeof(CharItemManager), nameof(CharItemManager.AddItemInternal))]
-public static class OnItemAddedPatch
+public static class AddItemPatch
 {
     public static void Postfix(CharItemManager __instance, ItemID itemId, int quantityToAdd)
     {
         IServiceProvider services = Melon<DamageMeterMod>.Instance.Services();
         WebSocketServer ws = services.GetRequiredService<WebSocketServer>();
-        InventoryManager inventoryManager = services.GetService<InventoryManager>();
+        InventoryManager inventoryManager = services.GetRequiredService<InventoryManager>();
         CharManager charMgr = __instance.GetComponent<CharManager>();
 
         int clientId = charMgr.GetClientId();
@@ -28,13 +29,13 @@ public static class OnItemAddedPatch
 }
 
 [HarmonyPatch(typeof(CharItemManager), nameof(CharItemManager.RemoveItemInternal))]
-public static class OnItemRemovedPatch
+public static class RemoveItemPatch
 {
     public static void Postfix(CharItemManager __instance, ItemID itemId, int quantityToRemove)
     {
         IServiceProvider services = Melon<DamageMeterMod>.Instance.Services();
         WebSocketServer ws = services.GetRequiredService<WebSocketServer>();
-        InventoryManager inventoryManager = services.GetService<InventoryManager>();
+        InventoryManager inventoryManager = services.GetRequiredService<InventoryManager>();
         CharManager charMgr = __instance.GetComponent<CharManager>();
 
         int clientId = charMgr.GetClientId();

@@ -2,6 +2,8 @@ import { css } from "styled-system/css";
 import { DamageDealtChart } from "~/components/DamageDealtChart";
 import { Inventory } from "~/components/Inventory";
 import { KillsChart } from "~/components/KillsChart";
+import { LevelDamageDealtChart } from "~/components/LevelDamageDealtChart";
+import { LevelKillsChart } from "~/components/LevelKillsChart";
 import { Splitter } from "~/components/ui/splitter";
 
 export const HomePage = () => {
@@ -19,8 +21,9 @@ export const HomePage = () => {
 					class={css({ paddingY: "2", paddingX: "4", gap: "2", alignItems: "stretch", flexDir: "column", minHeight: "0" })}
 				>
 					<DamageDealtChart />
+					<LevelDamageDealtChart />
 					<KillsChart />
-					<DamageDealtChart />
+					<LevelKillsChart />
 				</Splitter.Panel>
 
 				<Splitter.ResizeTrigger id="l:r" />

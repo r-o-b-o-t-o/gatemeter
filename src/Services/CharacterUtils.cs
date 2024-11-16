@@ -1,17 +1,19 @@
 ﻿using Il2CppGatekeeper.Char_Scripts;
 using Il2CppGatekeeper.Char_Scripts.General;
 
-namespace GatekeeperDamageMeter;
+namespace GatekeeperDamageMeter.Services;
 
 public class CharacterUtils
 {
     public CharManager[] CharManagers()
     {
-        List<CharManager> chars = new();
+        CharManager[] chars = new CharManager[PlayableCharactersHolder.PlayableCharactersList.Count];
+        int i = 0;
         foreach (CharManager c in PlayableCharactersHolder.PlayableCharactersList.Values)
         {
-            chars.Add(c);
+            chars[i] = c;
+            ++i;
         }
-        return chars.ToArray();
+        return chars;
     }
 }
