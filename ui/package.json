@@ -35,7 +35,6 @@
 		"eslint-plugin-prettier": "^5.2.1",
 		"eslint-plugin-solid": "^0.14.3",
 		"eventemitter3": "^5.0.1",
-		"nanoid": "^5.0.7",
 		"prettier": "^3.3.3",
 		"sass": "^1.80.3",
 		"typescript-eslint": "^8.11.0",

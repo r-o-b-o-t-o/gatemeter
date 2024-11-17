@@ -2,7 +2,7 @@ import { throttle } from "@solid-primitives/scheduled";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 
 import { CharacterStatsMessage } from "../WsMessages";
-import { characterCategories, characterColors, chartsDelay, maxPlayers } from "../consts";
+import { characterCategories, characterChartBarHeight, characterColors, chartsDelay, maxPlayers } from "../consts";
 import { characterImages } from "../images";
 import { mapPlayerData, rankByValues } from "../utils";
 import { BarChartRace } from "./BarChartRace";
@@ -53,16 +53,16 @@ export const KillsChart = () => {
 	return (
 		<div class={css({ display: "flex", flexDir: "column", flex: 1, justifyContent: "center", textAlign: "center", minHeight: "0" })}>
 			<div class="title">Kills</div>
-			<div class={css({ minHeight: "0" })}>
+			<div class={css({ marginTop: "1", minHeight: "0" })}>
 				<BarChartRace
-					class={css({ marginTop: "1" })}
 					data={kills()}
 					categories={characterCategories}
 					categoryImages={characterImages}
 					initialBarColors={characterColors}
 					showCategory={true}
 					delay={chartsDelay}
-					barCount={maxPlayers}
+					barHeight={characterChartBarHeight}
+					maxBarCount={maxPlayers}
 					setReset={setResetChart}
 				/>
 			</div>

@@ -1,7 +1,6 @@
 import { Setter, createEffect, onMount } from "solid-js";
 
 import * as d3 from "d3";
-import { nanoid } from "nanoid";
 
 interface IDataType {
 	label: string;
@@ -14,7 +13,8 @@ interface IDataType {
 
 interface IProperties<T extends IDataType> {
 	data: T[];
-	barCount: number;
+	barHeight: number;
+	maxBarCount: number;
 	categories: string[];
 	categoryImages?: string[];
 	delay?: number;
@@ -27,38 +27,40 @@ interface IProperties<T extends IDataType> {
 
 export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 	let svgRef: SVGSVGElement;
-	let plotRef: SVGGElement;
-
 	let svg: d3.Selection<SVGSVGElement, unknown, null, undefined>;
-	let plot: d3.Selection<SVGGElement, unknown, null, undefined>;
 
-	const barCount = () => props.barCount;
+	const barCount = () => Math.min(props.data.length, props.maxBarCount);
 	const barColors = props.initialBarColors ?? d3.schemeCategory10;
 	const delay = () => props.delay ?? 500;
 	const showCategory = () => props.showCategory ?? true;
-	const plotW = 500;
-	const plotH = 300;
+	const plotW = 700;
+	const plotH = () => props.barHeight * barCount();
 	const hasImages = () => props.categoryImages?.length > 0;
 
 	const xScale = d3.scaleLinear();
-	const yScale = d3.scaleBand(d3.range(barCount()), [0, plotH]);
+	const yScale: d3.ScaleBand<number> = d3.scaleBand();
 	const cScale = d3.scaleOrdinal(barColors);
 
 	const reset = () => {
 		xScale.domain([0, 0]);
-		plot.selectAll("g.bar").remove();
+		svg.selectAll("g.bar").remove();
 	};
 
 	xScale.rangeRound([0, plotW]);
 
 	createEffect(() => {
-		props.setReset?.(() => {
-			return reset;
-		});
+		yScale.domain(d3.range(barCount()));
+		yScale.range([0, plotH()]);
 	});
 
 	createEffect(() => {
 		cScale.domain(props.categories);
+	});
+
+	createEffect(() => {
+		props.setReset?.(() => {
+			return reset;
+		});
 	});
 
 	let tbr;
@@ -149,7 +151,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 			.select("text.value")
 			.transition(tbv)
 			.attr("x", (d) => xScale(d.value))
-			.text((d) => formatNumber(d.value)); // FIX: add interpolation (or not?)
+			.text((d) => formatNumber(d.value));
 	};
 
 	const draw = () => {
@@ -170,7 +172,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		}
 
 		const step = yScale.step();
-		plot
+		svg
 			.selectAll("g.bar")
 			.data(data, (d: T) => d.label)
 			.join(
@@ -192,18 +194,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 	onMount(() => {
 		svg = d3.select(svgRef);
-		plot = d3.select(plotRef);
 	});
 
-	const clipPathId = `clip-path-${nanoid()}`;
-
-	return (
-		<svg id={props.id} class={props.class ?? ""} ref={svgRef} width="100%" height="100%" viewBox={`0 0 ${plotW} ${plotH}`}>
-			<g ref={plotRef} class="plot" clip-path={`url(#${clipPathId})`}>
-				<clipPath id={clipPathId}>
-					<rect x={0} y={0} width={plotW} height={plotH} />
-				</clipPath>
-			</g>
-		</svg>
-	);
+	return <svg id={props.id} class={props.class ?? ""} ref={svgRef} width="100%" height="100%" viewBox={`0 0 ${plotW} ${plotH()}`} />;
 };
