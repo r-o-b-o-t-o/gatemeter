@@ -1,5 +1,6 @@
 import { Setter, createEffect, onMount } from "solid-js";
 
+import styles from "./BarChartRace.module.scss";
 import * as d3 from "d3";
 
 interface IDataType {
@@ -43,7 +44,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 	const reset = () => {
 		xScale.domain([0, 0]);
-		svg.selectAll("g.bar").remove();
+		svg.selectAll(`.${styles.bar}`).remove();
 	};
 
 	xScale.rangeRound([0, plotW]);
@@ -89,7 +90,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		const barH = yScale.bandwidth();
 
 		sel
-			.attr("class", `bar ${showCategory() ? "show-category" : ""}`)
+			.attr("class", `${styles.bar} ${showCategory() ? styles.showCategory : ""}`)
 			.attr("transform", (d: T) => `translate(0, ${(d.prev - 1) * step})`)
 			.transition(tbr)
 			.attr("transform", (d: T) => `translate(0, ${(d.rank - 1) * step})`);
@@ -104,7 +105,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 		sel
 			.append("text")
-			.attr("class", "label")
+			.attr("class", styles.label)
 			.attr("x", (hasImages() ? 75 : 0) + 12)
 			.attr("y", "1.35em")
 			.text((d) => d.label);
@@ -112,7 +113,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		if (showCategory()) {
 			sel
 				.append("text")
-				.attr("class", "cat")
+				.attr("class", styles.category)
 				.attr("x", (hasImages() ? 75 : 0) + 12)
 				.attr("y", "3.5em")
 				.text((d) => props.categories[d.category]);
@@ -120,7 +121,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 		sel
 			.append("text")
-			.attr("class", "value")
+			.attr("class", styles.value)
 			.attr("x", (d: T) => xScale(d.value))
 			.attr("y", "1.5em")
 			.attr("dx", -12)
@@ -148,7 +149,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 			.attr("width", (d) => xScale(d.value));
 
 		gbar
-			.select("text.value")
+			.select(`.${styles.value}`)
 			.transition(tbv)
 			.attr("x", (d) => xScale(d.value))
 			.text((d) => formatNumber(d.value));
@@ -173,7 +174,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 		const step = yScale.step();
 		svg
-			.selectAll("g.bar")
+			.selectAll(`.${styles.bar}`)
 			.data(data, (d: T) => d.label)
 			.join(
 				(enter) => enter.append("g").call(enterBar),
@@ -196,5 +197,14 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		svg = d3.select(svgRef);
 	});
 
-	return <svg id={props.id} class={props.class ?? ""} ref={svgRef} width="100%" height="100%" viewBox={`0 0 ${plotW} ${plotH()}`} />;
+	return (
+		<svg
+			id={props.id}
+			class={`${styles.chart} ${props.class ?? ""}`}
+			ref={svgRef}
+			width="100%"
+			height="100%"
+			viewBox={`0 0 ${plotW} ${plotH()}`}
+		/>
+	);
 };
