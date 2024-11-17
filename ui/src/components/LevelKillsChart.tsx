@@ -62,6 +62,7 @@ export const LevelKillsChart = () => {
 					categoryImages={characterImages}
 					initialBarColors={characterColors}
 					showCategory={true}
+					showPercentage={true}
 					delay={chartsDelay}
 					barHeight={characterChartBarHeight}
 					maxBarCount={maxPlayers}

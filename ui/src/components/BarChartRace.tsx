@@ -20,6 +20,7 @@ interface IProperties<T extends IDataType> {
 	categoryImages?: string[];
 	delay?: number;
 	showCategory?: boolean;
+	showPercentage?: boolean;
 	initialBarColors?: (d3.RGBColor | string)[];
 	id?: string;
 	class?: string;
@@ -34,6 +35,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 	const barColors = props.initialBarColors ?? d3.schemeCategory10;
 	const delay = () => props.delay ?? 500;
 	const showCategory = () => props.showCategory ?? true;
+	const showPercentage = () => props.showPercentage ?? true;
 	const plotW = 700;
 	const plotH = () => props.barHeight * barCount();
 	const hasImages = () => props.categoryImages?.length > 0;
@@ -64,6 +66,8 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		});
 	});
 
+	let total = 0;
+
 	let tbr;
 	let tbv;
 	const createTransitions = () => {
@@ -90,7 +94,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		const barH = yScale.bandwidth();
 
 		sel
-			.attr("class", `${styles.bar} ${showCategory() ? styles.showCategory : ""}`)
+			.attr("class", `${styles.bar} ${showCategory() ? styles.showCategory : ""} ${showPercentage() ? styles.showPercentage : ""}`)
 			.attr("transform", (d: T) => `translate(0, ${(d.prev - 1) * step})`)
 			.transition(tbr)
 			.attr("transform", (d: T) => `translate(0, ${(d.rank - 1) * step})`);
@@ -126,6 +130,16 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 			.attr("y", "1.5em")
 			.attr("dx", -12)
 			.text((d) => formatNumber(d.value));
+
+		if (showPercentage()) {
+			sel
+				.append("text")
+				.attr("class", styles.percentage)
+				.attr("x", (d: T) => xScale(d.value))
+				.attr("y", "3.5em")
+				.attr("dx", -12)
+				.text((d) => Math.round((d.value / total) * 100) + " %");
+		}
 
 		if (hasImages()) {
 			sel
@@ -171,6 +185,8 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		if (domain[1] <= hival) {
 			xScale.domain([0, hival]);
 		}
+
+		total = data.reduce((sum, d) => sum + d.value, 0);
 
 		const step = yScale.step();
 		svg
