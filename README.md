@@ -2,6 +2,8 @@
 
 Damage meter mod for the game Gatekeeper by Gravity Lagoon
 
+![Gatemeter](readme/gatemeter.png)
+
 ## ✨ Features
 
 -   Live charts for damage dealt and enemies killed (current level and total)
