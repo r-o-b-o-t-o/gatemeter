@@ -17,16 +17,16 @@ Damage meter mod for the game Gatekeeper by Gravity Lagoon
     -   Scroll down and find the table that says ".NET Runtime 6.x.xx":
         ![.NET Runtime downloads page](readme/dotnetruntime.png)
     -   Download and run the installer for your architecture (usually `x64`)
--   Install [MelonLoader](https://melonloader.org/) in your Gatekeeper directory:
-    -   Go to [MelonLoader's releases page on GitHub](https://github.com/LavaGang/MelonLoader/releases)
-    -   Download `MelonLoader.Installer.exe` in the list of assets for the latest release
+-   Install MelonLoader in your Gatekeeper directory:
+    -   Go to [MelonLoader's releases page on GitHub](https://github.com/LavaGang/MelonLoader/releases/latest)
+    -   Download `MelonLoader.Installer.exe` in the list of assets
     -   Start the installer
     -   Click on Gatekeeper in the list of games, then click "Install"  
         ![Melon Loader Installer](readme/melonloaderinstaller.png)
         -   If the game is not in the list, click "Add Game Manually", browse to the game's directory and select `Gatekeeper.exe`
 -   Install the mod:
-    -   Go to the [mod's releases page on GitHub](https://github.com/r-o-b-o-t-o/gatemeter/releases)
-    -   Download `Gatemeter.zip` in the list of assets for the latest release
+    -   Go to the [mod's releases page](https://github.com/r-o-b-o-t-o/gatemeter/releases/latest)
+    -   Download `Gatemeter.zip` in the list of assets
     -   Unzip the archive into the game directory (⚠️ use "Extract Here", don't extract to a subfolder!)
 -   Start the game
 -   The damage meter will open in your default web browser
