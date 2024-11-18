@@ -24,7 +24,11 @@ public static class GameplayManagerInitPatch
     {
         IServiceProvider services = Melon<GatemeterMod>.Instance.Services();
 
-        NewLevelEventEmitter newLevelEventEmitter = services.GetRequiredService<NewLevelEventEmitter>();
-        newLevelEventEmitter.NewLevel?.Invoke();
+        string scene = SceneManager.GetActiveScene().name;
+        if (scene != "Delta_Hub")
+        {
+            NewLevelEventEmitter newLevelEventEmitter = services.GetRequiredService<NewLevelEventEmitter>();
+            newLevelEventEmitter.NewLevel?.Invoke();
+        }
     }
 }
