@@ -34,7 +34,7 @@ Damage meter mod for the game Gatekeeper by Gravity Lagoon
 
 ### Project Setup
 
--   Install [MelonLoader](https://melonloader.org/) in your Gatekeeper directory, see [🛠️ Installation](#🛠️-installation)
+-   Install [MelonLoader](https://melonloader.org/) in your Gatekeeper directory, see [🛠️ Installation](#%EF%B8%8F-installation)
 -   Start the game once, MelonLoader will extract all the DLLs required by the project
 -   Duplicate `Gatemeter.csproj.user.dist`, rename the copy as `Gatemeter.csproj.user`
 -   Edit `Gatemeter.csproj.user` and set the `<GamePath>` tag to the full path of your Gatekeeper game directory
