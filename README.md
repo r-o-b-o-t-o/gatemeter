@@ -10,6 +10,11 @@ Damage meter mod for the game Gatekeeper by Gravity Lagoon
 
 ## 🛠️ Installation
 
+-   Install the .NET 6.0 runtime:
+    -   Go to the [downloads page](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+    -   Scroll down and find the table that says ".NET Runtime 6.x.xx":
+        ![.NET Runtime downloads page](readme/dotnetruntime.png)
+    -   Download and run the installer for your architecture (usually `x64`)
 -   Install [MelonLoader](https://melonloader.org/) in your Gatekeeper directory:
     -   Go to [MelonLoader's releases page on GitHub](https://github.com/LavaGang/MelonLoader/releases)
     -   Download `MelonLoader.Installer.exe` in the list of assets for the latest release
