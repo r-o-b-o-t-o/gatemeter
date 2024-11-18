@@ -68,8 +68,8 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 
 	let total = 0;
 
-	let tbr;
-	let tbv;
+	let tbr: d3.Transition<SVGSVGElement, unknown, null, undefined>;
+	let tbv: d3.Transition<SVGSVGElement, unknown, null, undefined>;
 	const createTransitions = () => {
 		// Change bar rank (delayed, short, eased)
 		tbr = svg
@@ -88,8 +88,9 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 	const formatNumber = (num: number) => {
 		return numberFormatter.format(num);
 	};
+	const percentage = (value: number) => Math.round((value / total) * 100) + " %";
 
-	const enterBar = (sel) => {
+	const enterBar = (sel: d3.Selection<SVGGElement, T, SVGSVGElement, unknown>) => {
 		const step = yScale.step();
 		const barH = yScale.bandwidth();
 
@@ -104,15 +105,15 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 			.attr("y", 0)
 			.attr("x", 0)
 			.attr("height", barH)
-			.attr("width", (d) => xScale(d.value))
-			.attr("fill", (d) => cScale(props.categories[d.category]));
+			.attr("width", (d: T) => xScale(d.value))
+			.attr("fill", (d: T) => cScale(props.categories[d.category]).toString());
 
 		sel
 			.append("text")
 			.attr("class", styles.label)
 			.attr("x", (hasImages() ? 75 : 0) + 12)
 			.attr("y", "1.35em")
-			.text((d) => d.label);
+			.text((d: T) => d.label);
 
 		if (showCategory()) {
 			sel
@@ -120,7 +121,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 				.attr("class", styles.category)
 				.attr("x", (hasImages() ? 75 : 0) + 12)
 				.attr("y", "3.5em")
-				.text((d) => props.categories[d.category]);
+				.text((d: T) => props.categories[d.category]);
 		}
 
 		sel
@@ -129,7 +130,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 			.attr("x", (d: T) => xScale(d.value))
 			.attr("y", "1.5em")
 			.attr("dx", -12)
-			.text((d) => formatNumber(d.value));
+			.text((d: T) => formatNumber(d.value));
 
 		if (showPercentage()) {
 			sel
@@ -138,7 +139,7 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 				.attr("x", (d: T) => xScale(d.value))
 				.attr("y", "3.5em")
 				.attr("dx", -12)
-				.text((d) => Math.round((d.value / total) * 100) + " %");
+				.text((d: T) => percentage(d.value));
 		}
 
 		if (hasImages()) {
@@ -152,21 +153,27 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		}
 	};
 
-	const updateBar = (gbar) => {
+	const updateBar = (gbar: d3.Selection<d3.BaseType, T, SVGSVGElement, unknown>) => {
 		const step = yScale.step();
 
-		gbar.transition(tbr).attr("transform", (d) => `translate(0,${(d.rank - 1) * step})`);
+		gbar.transition(tbr).attr("transform", (d: T) => `translate(0,${(d.rank - 1) * step})`);
 
 		gbar
 			.select("rect")
 			.transition(tbv)
-			.attr("width", (d) => xScale(d.value));
+			.attr("width", (d: T) => xScale(d.value));
 
 		gbar
 			.select(`.${styles.value}`)
 			.transition(tbv)
-			.attr("x", (d) => xScale(d.value))
-			.text((d) => formatNumber(d.value));
+			.attr("x", (d: T) => xScale(d.value))
+			.text((d: T) => formatNumber(d.value));
+
+		gbar
+			.select(`.${styles.percentage}`)
+			.transition(tbv)
+			.attr("x", (d: T) => xScale(d.value))
+			.text((d: T) => percentage(d.value));
 	};
 
 	const draw = () => {
