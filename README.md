@@ -7,7 +7,8 @@ Damage meter mod for the game Gatekeeper by Gravity Lagoon
 ## ✨ Features
 
 -   Live charts for damage dealt and enemies killed (current level and total)
--   List of items and triads acquired by everyone in your lobby
+-   List of items acquired by everyone in your lobby
+-   Keep track of your triad progress
 -   Opens in a web browser
 
 ## 🛠️ Installation
