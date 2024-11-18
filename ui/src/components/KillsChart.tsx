@@ -52,7 +52,7 @@ export const KillsChart = () => {
 
 	return (
 		<div class={css({ display: "flex", flexDir: "column", flex: 1, justifyContent: "center", textAlign: "center", minHeight: "0" })}>
-			<div class="title">Kills</div>
+			<div class="title">Kills&ensp;(total)</div>
 			<div class={css({ marginTop: "1", minHeight: "0" })}>
 				<BarChartRace
 					data={kills()}
