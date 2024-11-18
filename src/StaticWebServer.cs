@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore;
 using Microsoft.Extensions.FileProviders;
 
-namespace GatekeeperDamageMeter;
+namespace Gatemeter;
 
 public class StaticWebServer
 {

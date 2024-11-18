@@ -1,4 +1,4 @@
-namespace GatekeeperDamageMeter.Events;
+namespace Gatemeter.Events;
 
 public interface ICharacterStatsUpdateEventEmitter
 {

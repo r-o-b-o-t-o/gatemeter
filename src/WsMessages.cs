@@ -1,6 +1,6 @@
-using GatekeeperDamageMeter.Services;
+using Gatemeter.Services;
 
-namespace GatekeeperDamageMeter;
+namespace Gatemeter;
 
 public class CharacterStatsMessageData
 {

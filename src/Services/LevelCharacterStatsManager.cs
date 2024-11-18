@@ -1,6 +1,6 @@
-using GatekeeperDamageMeter.Events;
+using Gatemeter.Events;
 
-namespace GatekeeperDamageMeter.Services;
+namespace Gatemeter.Services;
 
 public sealed class LevelCharacterStatsManager : IDisposable
 {

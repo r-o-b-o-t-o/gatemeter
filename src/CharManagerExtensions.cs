@@ -8,7 +8,7 @@ using Il2CppGatekeeper.Char_Scripts.Pandora;
 using Il2CppGatekeeper.Char_Scripts.TechHunter;
 using Il2CppGatekeeper.Network.Team;
 
-namespace GatekeeperDamageMeter;
+namespace Gatemeter;
 
 public static class CharManagerExtensions
 {

@@ -5,6 +5,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
+		<Version>1.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -12,10 +13,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="readme\**" />
 		<Compile Remove="ui\**" />
+		<Content Remove="readme\**" />
 		<Content Remove="ui\**" />
+		<None Remove="readme\**" />
 		<None Remove="ui\**" />
+		<EmbeddedResource Remove="readme\**" />
 		<EmbeddedResource Remove="ui\**" />
+		<None Remove="Gatemeter.csproj.user.dist" />
+		<None Remove="README.md" />
 	</ItemGroup>
 
 	<ItemGroup>

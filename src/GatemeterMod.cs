@@ -1,10 +1,10 @@
-﻿using GatekeeperDamageMeter.Events;
-using GatekeeperDamageMeter.Services;
+﻿using Gatemeter.Events;
+using Gatemeter.Services;
 using MelonLoader;
 
-namespace GatekeeperDamageMeter;
+namespace Gatemeter;
 
-public class DamageMeterMod : MelonMod, IUpdateEventEmitter
+public class GatemeterMod : MelonMod, IUpdateEventEmitter
 {
     public Action Update { get; set; }
     public Action LateUpdate { get; set; }
@@ -35,7 +35,7 @@ public class DamageMeterMod : MelonMod, IUpdateEventEmitter
                 .AddSingleton<LevelCharacterStatsManager>()
                 .AddSingleton<WsDispatcher>()
 #if !DEBUG
-                .AddSingleton(new StaticWebServer(Path.Combine(Path.GetDirectoryName(MelonAssembly.Location), "GatekeeperDamageMeter"), staticServerPort.Value))
+                .AddSingleton(new StaticWebServer(Path.Combine(Path.GetDirectoryName(MelonAssembly.Location), "Gatemeter"), staticServerPort.Value))
 #endif
                 .AddSingleton((provider) => new WebSocketServer(provider.GetRequiredService<MelonLogger.Instance>(), wsServerHost.Value, wsServerPort.Value))
         );

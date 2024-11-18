@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatekeeperDamageMeter", "GatekeeperDamageMeter.csproj", "{1095B1F7-19C6-4DAA-9EA5-BDC997A985B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gatemeter", "Gatemeter.csproj", "{1095B1F7-19C6-4DAA-9EA5-BDC997A985B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

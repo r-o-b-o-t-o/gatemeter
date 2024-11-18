@@ -2,7 +2,7 @@ using MelonLoader;
 using System.Text.Json;
 using WatsonWebsocket;
 
-namespace GatekeeperDamageMeter.Services;
+namespace Gatemeter.Services;
 
 public class WebSocketServer
 {

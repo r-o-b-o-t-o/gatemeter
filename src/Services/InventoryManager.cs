@@ -1,7 +1,7 @@
-﻿using GatekeeperDamageMeter.Events;
+﻿using Gatemeter.Events;
 using Il2CppGatekeeper.Items;
 
-namespace GatekeeperDamageMeter.Services;
+namespace Gatemeter.Services;
 
 public sealed class InventoryManager : IDisposable
 {
