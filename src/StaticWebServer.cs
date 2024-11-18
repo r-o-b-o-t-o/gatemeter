@@ -1,5 +1,7 @@
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.Extensions.FileProviders;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace Gatemeter;
 
@@ -7,6 +9,8 @@ public class StaticWebServer
 {
     public StaticWebServer(string directory, int port)
     {
+        string url = $"http://localhost:{port}";
+
         WebHost.CreateDefaultBuilder()
             .Configure(builder =>
             {
@@ -21,8 +25,40 @@ public class StaticWebServer
                 });
             })
             .UseWebRoot(directory)
-            .UseUrls($"http://localhost:{port}")
+            .UseUrls(url)
             .Build()
             .RunAsync();
+
+        OpenUrl(url);
+    }
+
+    private static void OpenUrl(string url)
+    {
+        try
+        {
+            Process.Start(url);
+        }
+        catch
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo(url)
+                {
+                    UseShellExecute = true
+                });
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Process.Start("xdg-open", url);
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                Process.Start("open", url);
+            }
+            else
+            {
+                throw;
+            }
+        }
     }
 }
