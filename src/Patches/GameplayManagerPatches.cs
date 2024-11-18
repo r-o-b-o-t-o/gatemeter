@@ -2,6 +2,7 @@ using Gatemeter.Events;
 using HarmonyLib;
 using Il2CppGatekeeper.General;
 using MelonLoader;
+using UnityEngine.SceneManagement;
 
 namespace Gatemeter.Patches;
 
