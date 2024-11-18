@@ -55,7 +55,11 @@ export const Inventory = () => {
 
 			<For each={Object.values(items)}>
 				{(player) => {
-					const totalCount = () => Object.values(player.items).reduce((sum, current) => sum + current, 0);
+					const totalCount = () =>
+						Object.keys(player.items)
+							.filter((id) => !allItems[id].triad)
+							.map((id) => player.items[id])
+							.reduce((sum, current) => sum + current, 0);
 					return (
 						<div>
 							<div class="title-2">
