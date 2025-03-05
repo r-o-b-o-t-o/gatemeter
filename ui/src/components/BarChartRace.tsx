@@ -187,11 +187,8 @@ export const BarChartRace = <T extends IDataType>(props: IProperties<T>) => {
 		createTransitions();
 
 		// X scale is "reactive"
-		const domain = xScale.domain();
 		const hival = data[0].value;
-		if (domain[1] <= hival) {
-			xScale.domain([0, hival]);
-		}
+		xScale.domain([0, hival]);
 
 		total = data.reduce((sum, d) => sum + d.value, 0);
 
