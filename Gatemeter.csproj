@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -15,12 +15,16 @@
 	<ItemGroup>
 		<Compile Remove="readme\**" />
 		<Compile Remove="ui\**" />
+		<Compile Remove="UserLibs\**" />
 		<Content Remove="readme\**" />
 		<Content Remove="ui\**" />
+		<Content Remove="UserLibs\**" />
 		<None Remove="readme\**" />
 		<None Remove="ui\**" />
+		<None Remove="UserLibs\**" />
 		<EmbeddedResource Remove="readme\**" />
 		<EmbeddedResource Remove="ui\**" />
+		<EmbeddedResource Remove="UserLibs\**" />
 		<None Remove="Gatemeter.csproj.user.dist" />
 		<None Remove="README.md" />
 	</ItemGroup>
