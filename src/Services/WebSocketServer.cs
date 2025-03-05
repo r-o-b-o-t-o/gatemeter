@@ -21,8 +21,9 @@ public class WebSocketServer
         server.ClientConnected += ClientConnected;
         server.ClientDisconnected += ClientDisconnected;
         server.MessageReceived += MessageReceived;
+        logger.Msg($"Starting WebSocket server on {host}:{port}...");
         server.Start();
-        logger.Msg("WebSocket server started on port " + port);
+        logger.Msg($"WebSocket server started on {host}:{port}");
     }
 
     public async Task BroadcastAsync(IMessage message)
