@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
@@ -46,8 +46,8 @@
 		<Reference Include="Il2CppInterop.Runtime">
 			<HintPath>$(GamePath)\MelonLoader\net6\Il2CppInterop.Runtime.dll</HintPath>
 		</Reference>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>$(GamePath)\MelonLoader\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+		<Reference Include="Il2CppGatekeeper">
+			<HintPath>$(GamePath)\MelonLoader\Il2CppAssemblies\Il2CppGatekeeper.dll</HintPath>
 		</Reference>
 		<Reference Include="FishNet.Runtime">
 			<HintPath>$(GamePath)\MelonLoader\Il2CppAssemblies\Il2CppFishNet.Runtime.dll</HintPath>

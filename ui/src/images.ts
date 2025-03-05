@@ -5,5 +5,6 @@ import mediatorImg from "./assets/img/characters/Mediator_Portrait_mini.webp";
 import nidumImg from "./assets/img/characters/Nidum_Portrait_mini.webp";
 import pandoraImg from "./assets/img/characters/Pandora_Portrait_mini.webp";
 import techHunterImg from "./assets/img/characters/TechHunter_Portrait_mini.webp";
+import voidModelImg from "./assets/img/characters/VoidModel_Portrait_mini.webp";
 
-export const characterImages = [hybridImg, nidumImg, pandoraImg, bastionImg, techHunterImg, mediatorImg, echoImg];
+export const characterImages = [hybridImg, nidumImg, pandoraImg, bastionImg, techHunterImg, mediatorImg, echoImg, voidModelImg];

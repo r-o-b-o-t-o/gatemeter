@@ -6,6 +6,7 @@ using Il2CppGatekeeper.Char_Scripts.Mediator;
 using Il2CppGatekeeper.Char_Scripts.Nidum;
 using Il2CppGatekeeper.Char_Scripts.Pandora;
 using Il2CppGatekeeper.Char_Scripts.TechHunter;
+using Il2CppGatekeeper.Char_Scripts.VoidModel;
 using Il2CppGatekeeper.Network.Team;
 
 namespace Gatemeter;
@@ -21,6 +22,7 @@ public static class CharManagerExtensions
         TechHunter,
         Mediator,
         Echo,
+        VoidModel,
     }
 
     public static GatekeeperCharacter GetGatekeeperCharacter(this CharManager charManager)
@@ -52,6 +54,10 @@ public static class CharManagerExtensions
         if (charManager.GetComponent<EchoMain>() != null)
         {
             return GatekeeperCharacter.Echo;
+        }
+        if (charManager.GetComponent<VoidModelMain>() != null)
+        {
+            return GatekeeperCharacter.VoidModel;
         }
 
         return GatekeeperCharacter.Hybrid;

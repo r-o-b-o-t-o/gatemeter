@@ -6,10 +6,15 @@ import BadMoodImg from "./assets/img/items/BadMood.webp";
 import BalefulBoonImg from "./assets/img/items/BalefulBoon.webp";
 import BaneSealImg from "./assets/img/items/BaneSeal.webp";
 import BayonetImg from "./assets/img/items/Bayonet.webp";
+import BerserkersTokenImg from "./assets/img/items/BerserkersToken.webp";
+import BloodMarkImg from "./assets/img/items/BloodMark.webp";
+import BloodletterImg from "./assets/img/items/Bloodletter.webp";
 import BluePillImg from "./assets/img/items/BluePill.webp";
+import BulwarkImg from "./assets/img/items/Bulwark.webp";
 import BuzzImg from "./assets/img/items/Buzz.webp";
 import CalamitysPactImg from "./assets/img/items/CalamitysPact.webp";
 import CannonadeImg from "./assets/img/items/Cannonade.webp";
+import CatalystImg from "./assets/img/items/Catalyst.webp";
 import ChargedCoreImg from "./assets/img/items/ChargedCore.webp";
 import CinderFlareImg from "./assets/img/items/CinderFlare.webp";
 import ConfinesImg from "./assets/img/items/Confines.webp";
@@ -20,8 +25,10 @@ import CycloneImg from "./assets/img/items/Cyclone.webp";
 import DeadeyeImg from "./assets/img/items/Deadeye.webp";
 import DelugeonImg from "./assets/img/items/Delugeon.webp";
 import DetonatorImg from "./assets/img/items/Detonator.webp";
+import DualitySigilImg from "./assets/img/items/DualitySigil.webp";
 import DuoImg from "./assets/img/items/Duo.webp";
 import ElixImg from "./assets/img/items/Elix.webp";
+import EmberMarkImg from "./assets/img/items/EmberMark.webp";
 import EminenceImg from "./assets/img/items/Eminence.webp";
 import EmptyCarapaceImg from "./assets/img/items/EmptyCarapace.webp";
 import EnhancerImg from "./assets/img/items/Enhancer.webp";
@@ -36,6 +43,7 @@ import FractalImg from "./assets/img/items/Fractal.webp";
 import FuseImg from "./assets/img/items/Fuse.webp";
 import GreedsGambitImg from "./assets/img/items/GreedsGambit.webp";
 import HVCImg from "./assets/img/items/HVC.webp";
+import HalfmetalHeadImg from "./assets/img/items/HalfmetalHead.webp";
 import HarmonyImg from "./assets/img/items/Harmony.webp";
 import HeatConcentrateImg from "./assets/img/items/HeatConcentrate.webp";
 import HollowTalismanImg from "./assets/img/items/HollowTalisman.webp";
@@ -46,19 +54,23 @@ import InjectionImg from "./assets/img/items/Injection.webp";
 import JujuImg from "./assets/img/items/Juju.webp";
 import KarmaImg from "./assets/img/items/Karma.webp";
 import KettlebellImg from "./assets/img/items/Kettlebell.webp";
+import LeechImg from "./assets/img/items/Leech.webp";
 import LumiloreImg from "./assets/img/items/Lumilore.webp";
+import MomentumImg from "./assets/img/items/Momentum.webp";
 import NephritisImg from "./assets/img/items/Nephritis.webp";
 import NomadStickImg from "./assets/img/items/NomadStick.webp";
 import OpalEyeImg from "./assets/img/items/OpalEye.webp";
 import ProtectiveSignImg from "./assets/img/items/ProtectiveSign.webp";
 import Protocol1Img from "./assets/img/items/Protocol1.webp";
 import Protocol2Img from "./assets/img/items/Protocol2.webp";
+import PulsarImg from "./assets/img/items/Pulsar.webp";
 import ReflexImg from "./assets/img/items/Reflex.webp";
 import RendstoneImg from "./assets/img/items/Rendstone.webp";
 import RiftmakerImg from "./assets/img/items/Riftmaker.webp";
 import RiposteImg from "./assets/img/items/Riposte.webp";
 import RippletideImg from "./assets/img/items/Rippletide.webp";
 import RitualVesselImg from "./assets/img/items/RitualVessel.webp";
+import RootImg from "./assets/img/items/Root.webp";
 import RuneOfReboundImg from "./assets/img/items/RuneOfRebound.webp";
 import SecondWindImg from "./assets/img/items/SecondWind.webp";
 import ShieldModuleImg from "./assets/img/items/ShieldModule.webp";
@@ -67,13 +79,16 @@ import SootheStoneImg from "./assets/img/items/SootheStone.webp";
 import SoulWeaverImg from "./assets/img/items/SoulWeaver.webp";
 import SourceImg from "./assets/img/items/Source.webp";
 import SparkImg from "./assets/img/items/Spark.webp";
+import StasisMarkImg from "./assets/img/items/StasisMark.webp";
 import StringOfEliImg from "./assets/img/items/StringOfEli.webp";
 import SuperiorityImg from "./assets/img/items/Superiority.webp";
 import SwarmPendantImg from "./assets/img/items/SwarmPendant.webp";
 import TamerImg from "./assets/img/items/Tamer.webp";
 import TarraClawImg from "./assets/img/items/TarraClaw.webp";
 import ThunderRingImg from "./assets/img/items/ThunderRing.webp";
+import TranquilizerImg from "./assets/img/items/Tranquilizer.webp";
 import TriumphImg from "./assets/img/items/Triumph.webp";
+import UmbraImg from "./assets/img/items/Umbra.webp";
 import VanguardImg from "./assets/img/items/Vanguard.webp";
 import VeilTalismanImg from "./assets/img/items/VeilTalisman.webp";
 import VertebralImplantImg from "./assets/img/items/VertebralImplant.webp";
@@ -169,6 +184,21 @@ export const allItems: { [key: number | string]: IItem } = {
 	79: { code: "BalefulBoon", name: "Baleful Boon", image: BalefulBoonImg },
 	80: { code: "Tamer", name: "Tamer", image: TamerImg },
 	81: { code: "Superiority", name: "Superiority", image: SuperiorityImg },
+	82: { code: "Bloodletter", name: "Bloodletter", image: BloodletterImg },
+	83: { code: "Catalyst", name: "Catalyst", image: CatalystImg },
+	84: { code: "Pulsar", name: "Pulsar", image: PulsarImg },
+	85: { code: "Leech", name: "Leech", image: LeechImg },
+	86: { code: "EmberMark", name: "Ember Mark", image: EmberMarkImg },
+	87: { code: "BloodMark", name: "Blood Mark", image: BloodMarkImg },
+	88: { code: "Momentum", name: "Momentum", image: MomentumImg },
+	89: { code: "Root", name: "Root", image: RootImg },
+	90: { code: "DualitySigil", name: "Duality Sigil", image: DualitySigilImg },
+	91: { code: "Tranquilizer", name: "Tranquilizer", image: TranquilizerImg },
+	92: { code: "BerserkersToken", name: "Berserker's Token", image: BerserkersTokenImg },
+	93: { code: "StasisMark", name: "Stasis Mark", image: StasisMarkImg },
+	94: { code: "Bulwark", name: "Bulwark", image: BulwarkImg },
+	95: { code: "HalfmetalHead", name: "Halfmetal Head", image: HalfmetalHeadImg },
+	96: { code: "Umbra", name: "Umbra", image: UmbraImg },
 	1000: { code: "TriadOfScorch", name: "Triad of Scorch", image: null, triad: [6, 10, 67] },
 	1001: { code: "TriadOfLife", name: "Triad of Life", image: null, triad: [7, 45, 28] },
 	1002: { code: "TriadOfCarnage", name: "Triad of Carnage", image: null, triad: [4, 51, 8] },
