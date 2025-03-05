@@ -11,7 +11,7 @@ public static class AddItemPatch
 {
     public static void Postfix(CharItemManager __instance, ItemID itemId, int quantityToAdd)
     {
-        Melon<GatemeterMod>.Instance.Services().GetRequiredService<CharItemManagerPatchesService>().RemoveItemInternal(__instance, itemId, quantityToAdd);
+        Melon<GatemeterMod>.Instance.Services().GetRequiredService<CharItemManagerPatchesService>().AddItemInternal(__instance, itemId, quantityToAdd);
     }
 }
 
