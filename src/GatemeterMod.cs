@@ -34,6 +34,9 @@ public class GatemeterMod : MelonMod, IUpdateEventEmitter
                 .AddSingleton<InventoryManager>()
                 .AddSingleton<LevelCharacterStatsManager>()
                 .AddSingleton<WsDispatcher>()
+                .AddSingleton<ArenaGameplayManagerPatchesService>()
+                .AddSingleton<CharItemManagerPatchesService>()
+                .AddSingleton<GameplayManagerPatchesService>()
 #if !DEBUG
                 .AddSingleton(new StaticWebServer(Path.Combine(Path.GetDirectoryName(MelonAssembly.Location), "Gatemeter"), staticServerPort.Value))
 #endif

@@ -1,4 +1,4 @@
-using Gatemeter.Events;
+using Gatemeter.Services;
 using HarmonyLib;
 using Il2CppGatekeeper.General.Arena;
 using Il2CppGatekeeper.General.Events.Arena;
@@ -11,9 +11,6 @@ public static class StartArenaRoundPatch
 {
     public static void Postfix(ArenaGameplayManager __instance, EventClientStartArenaRound eventData)
     {
-        IServiceProvider services = Melon<GatemeterMod>.Instance.Services();
-
-        NewLevelEventEmitter newLevelEventEmitter = services.GetRequiredService<NewLevelEventEmitter>();
-        newLevelEventEmitter.NewLevel?.Invoke();
+        Melon<GatemeterMod>.Instance.Services().GetRequiredService<ArenaGameplayManagerPatchesService>().ClientHandleStartArenaRound();
     }
 }
