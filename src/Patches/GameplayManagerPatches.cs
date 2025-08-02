@@ -1,6 +1,6 @@
 using Gatemeter.Services;
 using HarmonyLib;
-using Il2CppGatekeeper.General;
+using Il2CppGatekeeper.General.GameplayManagers;
 using MelonLoader;
 
 namespace Gatemeter.Patches;
