@@ -8,6 +8,7 @@ import BaneSealImg from "./assets/img/items/BaneSeal.webp";
 import BayonetImg from "./assets/img/items/Bayonet.webp";
 import BerserkersTokenImg from "./assets/img/items/BerserkersToken.webp";
 import BloodMarkImg from "./assets/img/items/BloodMark.webp";
+import BloodrushImg from "./assets/img/items/BloodRush.webp";
 import BloodletterImg from "./assets/img/items/Bloodletter.webp";
 import BluePillImg from "./assets/img/items/BluePill.webp";
 import BulwarkImg from "./assets/img/items/Bulwark.webp";
@@ -24,6 +25,7 @@ import CutCloutImg from "./assets/img/items/CutClout.webp";
 import CycloneImg from "./assets/img/items/Cyclone.webp";
 import DeadeyeImg from "./assets/img/items/Deadeye.webp";
 import DelugeonImg from "./assets/img/items/Delugeon.webp";
+import DestroyedFractalImg from "./assets/img/items/DestroyedFractal.webp";
 import DetonatorImg from "./assets/img/items/Detonator.webp";
 import DualitySigilImg from "./assets/img/items/DualitySigil.webp";
 import DuoImg from "./assets/img/items/Duo.webp";
@@ -37,6 +39,7 @@ import EssenceImg from "./assets/img/items/Essence.webp";
 import EternalHeartImg from "./assets/img/items/EternalHeart.webp";
 import ExtrasystoleImg from "./assets/img/items/Extrasystole.webp";
 import FirstImpressionImg from "./assets/img/items/FirstImpression.webp";
+import FissureImg from "./assets/img/items/Fissure.webp";
 import FlameDraftImg from "./assets/img/items/FlameDraft.webp";
 import FlashImg from "./assets/img/items/Flash.webp";
 import FractalImg from "./assets/img/items/Fractal.webp";
@@ -45,6 +48,7 @@ import GreedsGambitImg from "./assets/img/items/GreedsGambit.webp";
 import HVCImg from "./assets/img/items/HVC.webp";
 import HalfmetalHeadImg from "./assets/img/items/HalfmetalHead.webp";
 import HarmonyImg from "./assets/img/items/Harmony.webp";
+import HealingPearlImg from "./assets/img/items/HealingPearl.webp";
 import HeatConcentrateImg from "./assets/img/items/HeatConcentrate.webp";
 import HollowTalismanImg from "./assets/img/items/HollowTalisman.webp";
 import IndicatorImg from "./assets/img/items/Indicator.webp";
@@ -53,17 +57,23 @@ import InfurionImg from "./assets/img/items/Infurion.webp";
 import InjectionImg from "./assets/img/items/Injection.webp";
 import JujuImg from "./assets/img/items/Juju.webp";
 import KarmaImg from "./assets/img/items/Karma.webp";
+import KeenFangImg from "./assets/img/items/KeenFang.webp";
 import KettlebellImg from "./assets/img/items/Kettlebell.webp";
 import LeechImg from "./assets/img/items/Leech.webp";
+import LuckyCoinImg from "./assets/img/items/LuckyCoin.webp";
 import LumiloreImg from "./assets/img/items/Lumilore.webp";
+import ManifoldKeyImg from "./assets/img/items/ManifoldKey.webp";
 import MomentumImg from "./assets/img/items/Momentum.webp";
 import NephritisImg from "./assets/img/items/Nephritis.webp";
 import NomadStickImg from "./assets/img/items/NomadStick.webp";
 import OpalEyeImg from "./assets/img/items/OpalEye.webp";
+import OverchargeImg from "./assets/img/items/Overcharge.webp";
 import ProtectiveSignImg from "./assets/img/items/ProtectiveSign.webp";
 import Protocol1Img from "./assets/img/items/Protocol1.webp";
 import Protocol2Img from "./assets/img/items/Protocol2.webp";
+import ProvidenceImg from "./assets/img/items/Providence.webp";
 import PulsarImg from "./assets/img/items/Pulsar.webp";
+import PurifierCoreImg from "./assets/img/items/PurifierCore.webp";
 import ReflexImg from "./assets/img/items/Reflex.webp";
 import RendstoneImg from "./assets/img/items/Rendstone.webp";
 import RiftmakerImg from "./assets/img/items/Riftmaker.webp";
@@ -72,6 +82,7 @@ import RippletideImg from "./assets/img/items/Rippletide.webp";
 import RitualVesselImg from "./assets/img/items/RitualVessel.webp";
 import RootImg from "./assets/img/items/Root.webp";
 import RuneOfReboundImg from "./assets/img/items/RuneOfRebound.webp";
+import RunnersFlaskImg from "./assets/img/items/RunnersFlask.webp";
 import SecondWindImg from "./assets/img/items/SecondWind.webp";
 import ShieldModuleImg from "./assets/img/items/ShieldModule.webp";
 import SkirmishImg from "./assets/img/items/Skirmish.webp";
@@ -86,6 +97,7 @@ import SwarmPendantImg from "./assets/img/items/SwarmPendant.webp";
 import TamerImg from "./assets/img/items/Tamer.webp";
 import TarraClawImg from "./assets/img/items/TarraClaw.webp";
 import ThunderRingImg from "./assets/img/items/ThunderRing.webp";
+import TradersCodexImg from "./assets/img/items/TradersCodex.webp";
 import TranquilizerImg from "./assets/img/items/Tranquilizer.webp";
 import TriumphImg from "./assets/img/items/Triumph.webp";
 import UmbraImg from "./assets/img/items/Umbra.webp";
@@ -199,10 +211,22 @@ export const allItems: { [key: number | string]: IItem } = {
 	94: { code: "Bulwark", name: "Bulwark", image: BulwarkImg },
 	95: { code: "HalfmetalHead", name: "Halfmetal Head", image: HalfmetalHeadImg },
 	96: { code: "Umbra", name: "Umbra", image: UmbraImg },
+	97: { code: "HealingPearl", name: "Healing Pearl", image: HealingPearlImg },
+	98: { code: "DestroyedFractal", name: "Faded Fractal", image: DestroyedFractalImg },
+	99: { code: "PurifierCore", name: "Purifying Core", image: PurifierCoreImg },
+	100: { code: "Overcharge", name: "Overcharge", image: OverchargeImg },
+	101: { code: "RunnersFlask", name: "Runner's Flask", image: RunnersFlaskImg },
+	102: { code: "KeenFang", name: "Keen Fang", image: KeenFangImg },
+	103: { code: "Bloodrush", name: "Bloodrush", image: BloodrushImg },
+	104: { code: "TradersCodex", name: "Merchant's Codex", image: TradersCodexImg },
+	105: { code: "ManifoldKey", name: "Manifold Key", image: ManifoldKeyImg },
+	106: { code: "LuckyCoin", name: "Lucky Coin", image: LuckyCoinImg },
+	107: { code: "Providence", name: "Providence", image: ProvidenceImg },
+	108: { code: "Fissure", name: "Fissure", image: FissureImg },
 	1000: { code: "TriadOfScorch", name: "Triad of Scorch", image: null, triad: [6, 10, 67] },
 	1001: { code: "TriadOfLife", name: "Triad of Life", image: null, triad: [7, 45, 28] },
 	1002: { code: "TriadOfCarnage", name: "Triad of Carnage", image: null, triad: [4, 51, 8] },
-	1003: { code: "TriadOfRegeneration", name: "Triad of Regeneration", image: null, triad: [14, 23, 43] },
+	1003: { code: "TriadOfFractal", name: "Triad of Fractal", image: null, triad: [14, 23, 43] },
 	1004: { code: "TriadOfShock", name: "Triad of Shock", image: null, triad: [9, 73, 53] },
 	1005: { code: "TriadOfEmber", name: "Triad of Ember", image: null, triad: [18, 19, 25] },
 	1006: { code: "TriadOfCalibration", name: "Triad of Calibration", image: null, triad: [12, 11, 52] },
@@ -214,4 +238,13 @@ export const allItems: { [key: number | string]: IItem } = {
 	1012: { code: "TriadOfDevastation", name: "Triad of Devastation", image: null, triad: [32, 55, 60] },
 	1013: { code: "TriadOfTides", name: "Triad of Tides", image: null, triad: [36, 63, 26] },
 	1014: { code: "TriadOfFireflow", name: "Triad of Fireflow", image: null, triad: [35, 47, 20] },
+	1015: { code: "TriadOfThorns", name: "Triad Of Thorns", image: null, triad: [89, 49, 82] },
+	1016: { code: "TriadOfBounty", name: "Triad Of Bounty", image: null, triad: [48, 75, 30] },
+	1017: { code: "TriadOfSeverance", name: "Triad Of Severance", image: null, triad: [88, 16, 13] },
+	1018: { code: "TriadOfIsolation", name: "Triad Of Isolation", image: null, triad: [62, 76, 83] },
+	1019: { code: "TriadOfStatus", name: "Triad Of Status", image: null, triad: [86, 87, 93] },
+	1020: { code: "TriadOfBloodshed", name: "Triad Of Bloodshed", image: null, triad: [72, 103, 102] },
+	1021: { code: "TriadOfBreach", name: "Triad Of Breach", image: null, triad: [42, 108, 31] },
+	1022: { code: "TriadOfHeartburst", name: "Triad Of Heartburst", image: null, triad: [22, 33, 34] },
+	1023: { code: "TriadOfFerocity", name: "Triad Of Ferocity", image: null, triad: [1, 29, 92] },
 };
