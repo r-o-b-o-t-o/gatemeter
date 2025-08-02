@@ -1,4 +1,5 @@
-﻿using Il2CppGatekeeper.Char_Scripts.Bastion;
+﻿using Il2CppGatekeeper.Char_Scripts.Aegis;
+using Il2CppGatekeeper.Char_Scripts.Bastion;
 using Il2CppGatekeeper.Char_Scripts.Echo;
 using Il2CppGatekeeper.Char_Scripts.General;
 using Il2CppGatekeeper.Char_Scripts.Hybrid;
@@ -23,6 +24,7 @@ public static class CharManagerExtensions
         Mediator,
         Echo,
         VoidModel,
+        Aegis,
     }
 
     public static GatekeeperCharacter GetGatekeeperCharacter(this CharManager charManager)
@@ -58,6 +60,10 @@ public static class CharManagerExtensions
         if (charManager.GetComponent<VoidModelMain>() != null)
         {
             return GatekeeperCharacter.VoidModel;
+        }
+        if (charManager.GetComponent<AegisMain>() != null)
+        {
+            return GatekeeperCharacter.Aegis;
         }
 
         return GatekeeperCharacter.Hybrid;
